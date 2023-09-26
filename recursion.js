@@ -39,8 +39,14 @@ function isPalindrome(str) {
 
 /** findIndex: return the index of val in arr (or -1 if val is not present). */
 
-function findIndex(arr, val) {
-
+function findIndex(arr, val, index = 0) {
+  if (arr.length === 0) {
+    return -1;
+  }
+  if (arr[0] === val) {
+    return index;
+  }
+  return findIndex(arr.slice(1), val, index + 1);
 }
 
 /** revString: return a copy of a string, but in reverse. */
@@ -55,14 +61,13 @@ function revString(str) {
 /** gatherStrings: given an object, return an array of all of the string values. */
 
 function gatherStrings(obj) {
-
-}
-
-/** binarySearch: given a sorted array of numbers, and a value,
- * return the index of that value (or -1 if val is not present). */
-
-function binarySearch(arr, val) {
-
+  let allStrings = [];
+  for (const key in obj) {
+    const keyItem = obj[key]
+    if (typeof keyItem === "string") allStrings.push(keyItem);
+    else if (typeof keyItem === "object") allStrings = [...allStrings, ...gatherStrings(keyItem)];
+  }
+  return allStrings;
 }
 
 module.exports = {
@@ -72,6 +77,5 @@ module.exports = {
   isPalindrome,
   findIndex,
   revString,
-  gatherStrings,
-  binarySearch
+  gatherStrings
 };
