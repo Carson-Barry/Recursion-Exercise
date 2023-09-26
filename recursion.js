@@ -31,7 +31,10 @@ function everyOther(str) {
 /** isPalindrome: checks whether a string is a palindrome or not. */
 
 function isPalindrome(str) {
-
+  if (str.length === 0) {
+    return true;
+  }
+  return ((str[0] === str.slice(-1)) && isPalindrome(str.slice(1, -1)));
 }
 
 /** findIndex: return the index of val in arr (or -1 if val is not present). */
@@ -43,7 +46,10 @@ function findIndex(arr, val) {
 /** revString: return a copy of a string, but in reverse. */
 
 function revString(str) {
-
+  if (str.length === 0) {
+    return "";
+  }
+  return str.slice(-1) + revString(str.slice(0, -1))
 }
 
 /** gatherStrings: given an object, return an array of all of the string values. */
